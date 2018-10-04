@@ -1,11 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
- var listOfCards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor", 
+ var listOfCards0 = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor", 
  "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt", "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
 
 // get shuffled cards
-listOfCards = shuffle(listOfCards);
+var listOfCards = shuffle(listOfCards0);
 var attempts = 0;
 var twoStarRatingAttmepts = 20;
 var oneStarRatingAttmepts = 30;
@@ -59,6 +59,7 @@ function checkWin() {
 // show results
 function showResult() {
 	clearInterval(tickTimer);
+	tickTimer = null;
 	$(".score-panel").fadeOut();
 	$(".deck").fadeOut();
 	$(".result-panel").fadeIn();
@@ -75,10 +76,13 @@ function initialise() {
 function handleRestart() {
 	listOfCards = shuffle(listOfCards);
 	clearInterval(tickTimer);
+	tickTimer = null;
 	time_secs = 0;
 	time_mins = 0;
 	attempts = 0;
+	previousCardClicked = "";
 	$(".card").removeClass("match-permanent");
+	$(".card").removeClass("match");
 	$(".time").text((time_mins<10?"0"+time_mins:time_mins) + ":" + (time_secs<10?("0"+time_secs):time_secs));
 	$(".moves").text(attempts);
 	$(".fa-star").addClass("fagold");
@@ -105,7 +109,7 @@ function handleClicks() {
 		if (attempts == 0) 
 			tickTimer = setInterval(tick,1000);
 		var cardName = $(event.target).data("fa");
-		if (!($(event.target).hasClass("match"))) {
+		if (!($(event.target).hasClass("match") || $(event.target).hasClass("match-permanent"))) {
 			incrementMoves();
 			if (previousCardClicked == "") {
 				// new click
