@@ -33,11 +33,15 @@ h1 {
     font-weight: 300;
 }
 
+.fagold {
+    color: gold;
+}
+
 /*
  * Styles for the deck of cards
  */
 
-.deck {
+ .deck {
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -49,11 +53,13 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
+    max-width: 98%;
 }
 
 .deck .card {
     height: 125px;
     width: 125px;
+    margin-bottom: 20px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -63,6 +69,7 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    transition: all 0.3s ease;
 }
 
 .deck .card.open {
@@ -80,30 +87,52 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
+.deck .card.match-permanent {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+
+@media (max-width: 0px) {
+    .deck .card {
+        height: 50px;
+        width: 50px;
+    }
+}
 
 /*
  * Styles for the Score Panel
  */
 
-.score-panel {
+ .score-panel {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
+.score-panel .stars, .result-panel .stars  {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.score-panel .stars li, .result-panel .stars li {
     list-style: none;
     display: inline-block;
 }
 
 .score-panel .restart {
     float: right;
+    cursor: pointer;
+}
+
+/* Result panel*/
+.result-panel {
+    display: none;
+    text-align: center;
+}
+
+.restart {
     cursor: pointer;
 }
